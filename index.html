@@ -103,6 +103,20 @@ h1{font-size:clamp(44px,9vw,88px);margin:0;font-weight:900;letter-spacing:3px;te
   .card{padding:22px}
   .game-button{height:110px;font-size:25px}
 }
+
+/* === KOKI WORLD CHAOS MODE === */
+.chaos-btn{position:fixed;right:18px;bottom:18px;z-index:9999;border:0;border-radius:999px;padding:14px 18px;font-weight:900;cursor:pointer;background:#fff;color:#111;box-shadow:0 8px 30px #0008;transition:.2s}
+.chaos-btn:hover{transform:scale(1.08) rotate(-2deg)}
+body.chaos{animation:shake .16s infinite alternate}
+@keyframes shake{from{transform:translate(0,0)}to{transform:translate(1px,-1px)}}
+.chaos-banner{position:fixed;inset:0;z-index:9998;pointer-events:none;display:none;align-items:center;justify-content:center;font-size:clamp(42px,10vw,130px);font-weight:1000;text-align:center;text-shadow:0 8px 0 #000;color:#fff}
+body.chaos .chaos-banner{display:flex}
+.float-emoji{position:fixed;z-index:9997;pointer-events:none;font-size:32px;animation:floatUp 1.8s ease-out forwards}
+@keyframes floatUp{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(-180px) rotate(360deg)}}
+.glitch{animation:glitch .18s steps(2) 5}
+@keyframes glitch{0%{transform:translate(0)}33%{transform:translate(8px,-3px)}66%{transform:translate(-7px,4px)}100%{transform:translate(0)}}
+.secret-counter{font-weight:900;margin-top:8px;opacity:.85}
+
 </style>
 </head>
 <body>
@@ -350,6 +364,72 @@ setInterval(()=>{
   document.getElementById("clock").textContent=
     d.toLocaleTimeString("ja-JP");
 },1000);
+
+// ===== KOKI WORLD 超おもしろ追加機能 =====
+(() => {
+  const btn = document.getElementById("chaosBtn");
+  const banner = document.getElementById("chaosBanner");
+  if (!btn) return;
+
+  let chaos = false;
+  let chaosClicks = 0;
+  const sounds = ["ﾎﾟﾖﾝ!","ﾄﾞｰﾝ!","ﾋﾟﾛﾘﾝ!","何が起きた!?","草www","KOKI POWER!!"];
+  const emojis = ["🤣","🚀","🐢","🍙","💥","🦆","⭐","🗿","🔥","🐍"];
+
+  function popEmoji() {
+    const e = document.createElement("div");
+    e.className = "float-emoji";
+    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = Math.random()*92 + "vw";
+    e.style.top = (55 + Math.random()*35) + "vh";
+    document.body.appendChild(e);
+    setTimeout(() => e.remove(), 1900);
+  }
+
+  function chaosMode() {
+    chaos = !chaos;
+    document.body.classList.toggle("chaos", chaos);
+    btn.textContent = chaos ? "🧯 正常化" : "💥 カオス";
+    if (chaos) {
+      banner.textContent = "KOKI WORLD\n💥 CHAOS TIME 💥";
+      document.title = "💥 KOKI WORLD CHAOS";
+      for(let i=0;i<18;i++) setTimeout(popEmoji, i*80);
+      const cards = document.querySelectorAll(".card, section, header");
+      cards.forEach((x,i)=>setTimeout(()=>x.classList.add("glitch"), i*70));
+      setTimeout(()=>cards.forEach(x=>x.classList.remove("glitch")), 1800);
+    } else {
+      document.title = "KOKI WORLD 🚀";
+    }
+  }
+
+  btn.addEventListener("click", () => {
+    chaosClicks++;
+    chaosMode();
+    if (chaosClicks % 3 === 0) {
+      alert("🤣 カオスボタンを" + chaosClicks + "回押した！\nKOKI WORLDはもう戻れない……");
+    }
+  });
+
+  // Secret keyboard combo: K O K I
+  let seq = "";
+  document.addEventListener("keydown", e => {
+    if (e.key.length === 1) {
+      seq = (seq + e.key.toLowerCase()).slice(-4);
+      if (seq === "koki") {
+        chaosMode();
+        alert("🚀 KOKIコマンド認証！\n隠しモードを起動しました。");
+        seq = "";
+      }
+    }
+  });
+
+  // Random tiny "world events" on page click.
+  document.addEventListener("dblclick", () => {
+    popEmoji();
+    if (Math.random() < .25) alert("🗿 何も起きませんでした。\n……たぶん。");
+  });
+})();
+
 </script>
 
 
@@ -460,5 +540,8 @@ function bmi(){
   addPoints(3);
 }
 </script>
-<script>const pythonWorks={"2月19日　おみくじ　1年　P.42(2).pyw": "import random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\"]\nprint(random.choice(kuji))\n", "2月19日　会話　1年　P.32~35(2).pyw": "print(\"こんにちは、煌己さん！！\")\nprint(\"今日はいい天気ですね！\")\n", "2月19日　計算　1年　P.28~30(2).pyw": "Python 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)] on win32\nEnter \"help\" below or click \"Help\" above for more information.\n>>> print(7+25)\n32\n>>> print(25-7)\n18\n>>> print(25*4)\n100\n>>> print(25/5)\n5.0\n>>> print(999999999999999999999999999999999999999999999999999999999999999999999999999999999999*999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)\n999999999999999999999999999999999999999999999999999999999999999999999999999999999998999999000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5+4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"6*3\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\"\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> (\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n", "2月20日　BMI測定装置(身長はｍで！！）　1年　P.44~45(2).pyw": "身長 = 1.435\n体重 = 43.2\nbmi =体重/(身長*身長)\nprint(\"あなたのBMI値は、\",bmi,\"です\")\n", "2月20日　True or False　1年　P.76~77(1).pyw": "b= \"こんにちは\"\nif b.isdigit():\n    print(int(b)+23)\nelse:\n    print(\"数値じゃないよ\")\n", "2月20日　おみくじ（発展）　1年　P.80～81　(1).pyw": "print(\"大吉（だいきち） - 最も良い結果\" \"\\n\"\"中吉（ちゅうきち） - とても良い結果\"\"\\n\" \"小吉（しょうきち） - 良い運勢\"\"\\n\" \"吉（きち） - 順調な運勢\"\"\\n\" \"半吉（はんきち） - まずまず良い運勢\"\"\\n\" \"末吉（すえきち） - 最後に良くなる\"\"\\n\" \"末小吉（すえしょうきち） - 最後に少し良くなる\"\"\\n\"\"凶（きょう） - 悪い結果\"\"\\n\" \"小凶（しょうきょう） - 小さな悪い結果\"\"\\n\"\"半凶（はんきょう） - 半分悪い結果\"\"\\n\" \"末凶（すえきょう） - 最後に悪くなる\"\"\\n\" \"大凶（だいきょう） - 最も悪い結果\")\nimport random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\",\"半吉\",\"末吉\",\"末小吉\",\"半凶\",\"末凶\",\"末小吉\",\"大凶\"]\nprint(\"\\n\",random.choice(kuji))\n", "2月20日　カメさん円形！　1年　P.53(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    circle(100)\n    left(72)\ndone()\n", "2月20日　カメさん星形！　1年　P.52(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    forward(200)\n    left(144)\ndone()\n", "2月20日　カメさん正方形 ！　1年　P.50(1).pyw": "from turtle import *\nshape(\"turtle\")\nfor i in range(4):\n    forward(100)\n    left(90)\ndone()\n", "2月20日　カメさん直進！　1年　P.49(1).pyw": "from turtle import *\nshape(\"turtle\")\nforward(100)\ndone()\n", "2月20日　リスト　昼ごはん　1年　P.78～79(1).pyw": "lunch = [\"おにぎり\",\"パスタ\",\"ハンバーガー\",\"カレー\",\"定食\",\"サンドウィッチ\"]\nprint(lunch[2])\n", "2月20日　リストの中身を表示させ、足し算をする　1年　P.97(1).pyw": "scorelist = [64,100,78,80,72]\ntotal = 0\nfor i in scorelist:\n    total = total +i\nprint(total)\n", "2月20日　リストの中身を表示させる　1年　P.95(1).pyw": "scorelist = [64,100,78,80,72]\nfor i in scorelist:\n    print(i)\n"}; function showCode(n){document.getElementById('codeView').textContent=pythonWorks[n]||'内容なし'; addPoints(1);}</script></body>
+<script>const pythonWorks={"2月19日　おみくじ　1年　P.42(2).pyw": "import random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\"]\nprint(random.choice(kuji))\n", "2月19日　会話　1年　P.32~35(2).pyw": "print(\"こんにちは、煌己さん！！\")\nprint(\"今日はいい天気ですね！\")\n", "2月19日　計算　1年　P.28~30(2).pyw": "Python 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)] on win32\nEnter \"help\" below or click \"Help\" above for more information.\n>>> print(7+25)\n32\n>>> print(25-7)\n18\n>>> print(25*4)\n100\n>>> print(25/5)\n5.0\n>>> print(999999999999999999999999999999999999999999999999999999999999999999999999999999999999*999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)\n999999999999999999999999999999999999999999999999999999999999999999999999999999999998999999000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5+4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"6*3\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\"\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> (\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n", "2月20日　BMI測定装置(身長はｍで！！）　1年　P.44~45(2).pyw": "身長 = 1.435\n体重 = 43.2\nbmi =体重/(身長*身長)\nprint(\"あなたのBMI値は、\",bmi,\"です\")\n", "2月20日　True or False　1年　P.76~77(1).pyw": "b= \"こんにちは\"\nif b.isdigit():\n    print(int(b)+23)\nelse:\n    print(\"数値じゃないよ\")\n", "2月20日　おみくじ（発展）　1年　P.80～81　(1).pyw": "print(\"大吉（だいきち） - 最も良い結果\" \"\\n\"\"中吉（ちゅうきち） - とても良い結果\"\"\\n\" \"小吉（しょうきち） - 良い運勢\"\"\\n\" \"吉（きち） - 順調な運勢\"\"\\n\" \"半吉（はんきち） - まずまず良い運勢\"\"\\n\" \"末吉（すえきち） - 最後に良くなる\"\"\\n\" \"末小吉（すえしょうきち） - 最後に少し良くなる\"\"\\n\"\"凶（きょう） - 悪い結果\"\"\\n\" \"小凶（しょうきょう） - 小さな悪い結果\"\"\\n\"\"半凶（はんきょう） - 半分悪い結果\"\"\\n\" \"末凶（すえきょう） - 最後に悪くなる\"\"\\n\" \"大凶（だいきょう） - 最も悪い結果\")\nimport random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\",\"半吉\",\"末吉\",\"末小吉\",\"半凶\",\"末凶\",\"末小吉\",\"大凶\"]\nprint(\"\\n\",random.choice(kuji))\n", "2月20日　カメさん円形！　1年　P.53(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    circle(100)\n    left(72)\ndone()\n", "2月20日　カメさん星形！　1年　P.52(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    forward(200)\n    left(144)\ndone()\n", "2月20日　カメさん正方形 ！　1年　P.50(1).pyw": "from turtle import *\nshape(\"turtle\")\nfor i in range(4):\n    forward(100)\n    left(90)\ndone()\n", "2月20日　カメさん直進！　1年　P.49(1).pyw": "from turtle import *\nshape(\"turtle\")\nforward(100)\ndone()\n", "2月20日　リスト　昼ごはん　1年　P.78～79(1).pyw": "lunch = [\"おにぎり\",\"パスタ\",\"ハンバーガー\",\"カレー\",\"定食\",\"サンドウィッチ\"]\nprint(lunch[2])\n", "2月20日　リストの中身を表示させ、足し算をする　1年　P.97(1).pyw": "scorelist = [64,100,78,80,72]\ntotal = 0\nfor i in scorelist:\n    total = total +i\nprint(total)\n", "2月20日　リストの中身を表示させる　1年　P.95(1).pyw": "scorelist = [64,100,78,80,72]\nfor i in scorelist:\n    print(i)\n"}; function showCode(n){document.getElementById('codeView').textContent=pythonWorks[n]||'内容なし'; addPoints(1);}</script>
+<button class="chaos-btn" id="chaosBtn">💥 カオス</button>
+<div class="chaos-banner" id="chaosBanner">KOKI WORLD<br>💥 CHAOS TIME 💥</div>
+</body>
 </html>
