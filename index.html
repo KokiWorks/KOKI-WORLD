@@ -149,7 +149,23 @@ h1{font-size:clamp(44px,9vw,88px);margin:0;font-weight:900;letter-spacing:3px;te
       <button class="btn" onclick="secret()">？？？</button>
     </section>
 
+
     <section class="card big">
+      <h2>🐍 KOKIのPython作品</h2>
+      <p>アップロードしてくれたPython作品を、KOKI WORLDで遊べるWeb版にしたよ！</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px">
+        <button class="btn" onclick="openModal('greetModal')">👋 あいさつ</button>
+        <button class="btn" onclick="openModal('calcModal')">🧮 計算</button>
+        <button class="btn" onclick="openModal('etoModal')">🐲 干支</button>
+        <button class="btn" onclick="openModal('clockModal')">🕒 デジタル時計</button>
+        <button class="btn" onclick="openModal('stopModal')">⏱️ ストップウォッチ</button>
+        <button class="btn" onclick="openModal('editorModal')">📝 テキストエディタ</button>
+        <button class="btn" onclick="openModal('bmiModal')">📊 BMI計算</button>
+      </div>
+    </section>
+
+    <section class="card big"><h2>📚 KOKIのPython作品集</h2><p>今回送ってくれた作品をまとめたよ！</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"><button class="btn" onclick="showCode('2月19日\u3000おみくじ\u30001年\u3000P.42(2).pyw')">🎲 おみくじ</button><button class="btn" onclick="showCode('2月19日\u3000会話\u30001年\u3000P.32~35(2).pyw')">👋 会話</button><button class="btn" onclick="showCode('2月19日\u3000計算\u30001年\u3000P.28~30(2).pyw')">🧮 計算</button><button class="btn" onclick="showCode('2月20日\u3000BMI測定装置(身長はｍで！！）\u30001年\u3000P.44~45(2).pyw')">📊 BMI</button><button class="btn" onclick="showCode('2月20日\u3000True or False\u30001年\u3000P.76~77(1).pyw')">❓ True or False</button><button class="btn" onclick="showCode('2月20日\u3000おみくじ（発展）\u30001年\u3000P.80～81\u3000(1).pyw')">🎲 発展おみくじ</button><button class="btn" onclick="showCode('2月20日\u3000カメさん円形！\u30001年\u3000P.53(1).pyw')">🐢 円形</button><button class="btn" onclick="showCode('2月20日\u3000カメさん星形！\u30001年\u3000P.52(1).pyw')">⭐ 星形</button><button class="btn" onclick="showCode('2月20日\u3000カメさん正方形 ！\u30001年\u3000P.50(1).pyw')">⬜ 正方形</button><button class="btn" onclick="showCode('2月20日\u3000カメさん直進！\u30001年\u3000P.49(1).pyw')">➡️ 直進</button><button class="btn" onclick="showCode('2月20日\u3000リスト\u3000昼ごはん\u30001年\u3000P.78～79(1).pyw')">🍱 昼ごはんリスト</button><button class="btn" onclick="showCode('2月20日\u3000リストの中身を表示させ、足し算をする\u30001年\u3000P.97(1).pyw')">➕ リスト足し算</button><button class="btn" onclick="showCode('2月20日\u3000リストの中身を表示させる\u30001年\u3000P.95(1).pyw')">📋 リスト表示</button></div><p id="codeView" style="white-space:pre-wrap;background:#070912;padding:16px;border-radius:14px;margin-top:16px;min-height:80px">作品を選ぶとコードが表示されます。</p></section>
+<section class="card big">
       <h2>🪙 KOKI POINT</h2>
       <p>サイトで遊んでポイントを集めよう！ポイントはこのブラウザに保存されるよ。</p>
       <div class="point"><span id="points">0</span> P</div>
@@ -336,5 +352,113 @@ setInterval(()=>{
 },1000);
 </script>
 
-</body>
+
+<!-- Python app modals -->
+<div class="modal" id="greetModal"><div class="modalbox">
+<button class="close" onclick="closeModal('greetModal')">✕</button>
+<h2>👋 あいさつアプリ</h2>
+<input id="greetName" value="Koki" style="padding:12px;border-radius:10px;border:0;width:100%;margin:10px 0">
+<button class="btn" onclick="greet()">実行</button>
+<p id="greetResult"></p></div></div>
+
+<div class="modal" id="calcModal"><div class="modalbox">
+<button class="close" onclick="closeModal('calcModal')">✕</button>
+<h2>🧮 計算アプリ</h2>
+<input id="numA" type="number" value="7" style="padding:10px;width:40%">
+<select id="op" style="padding:10px"><option>+</option><option>-</option><option>×</option><option>÷</option></select>
+<input id="numB" type="number" value="25" style="padding:10px;width:40%">
+<button class="btn" onclick="calc()">計算！</button><h3 id="calcResult"></h3>
+</div></div>
+
+<div class="modal" id="etoModal"><div class="modalbox">
+<button class="close" onclick="closeModal('etoModal')">✕</button>
+<h2>🐲 干支調べアプリ</h2>
+<input id="yearInput" type="number" value="2026" style="padding:12px;width:100%">
+<button class="btn" onclick="eto()">調べる</button><p id="etoResult"></p>
+</div></div>
+
+<div class="modal" id="clockModal"><div class="modalbox" style="text-align:center">
+<button class="close" onclick="closeModal('clockModal')">✕</button>
+<h2>🕒 デジタル時計</h2><div id="bigClock" style="font-size:42px;font-weight:900"></div>
+<div id="bigDate" style="font-size:20px"></div>
+</div></div>
+
+<div class="modal" id="stopModal"><div class="modalbox" style="text-align:center">
+<button class="close" onclick="closeModal('stopModal')">✕</button>
+<h2>⏱️ ストップウォッチ</h2>
+<div id="sw" style="font-size:48px;font-weight:900">00:00.00</div>
+<button class="btn" onclick="swStart()">START</button>
+<button class="btn" onclick="swStop()">STOP</button>
+<button class="btn" onclick="swReset()">RESET</button>
+</div></div>
+
+<div class="modal" id="editorModal"><div class="modalbox">
+<button class="close" onclick="closeModal('editorModal')">✕</button>
+<h2>📝 Koki's Text Editor</h2>
+<textarea id="editor" style="width:100%;height:260px;padding:12px;border-radius:12px;background:#070912;color:#fff;border:1px solid #ffffff22" placeholder="ここに文章を書こう！"></textarea>
+<button class="btn" onclick="saveText()">保存</button>
+<button class="btn" onclick="loadText()">読み込み</button>
+<p id="editorMsg"></p>
+</div></div>
+
+<div class="modal" id="bmiModal"><div class="modalbox">
+<button class="close" onclick="closeModal('bmiModal')">✕</button>
+<h2>📊 BMI計算アプリ</h2>
+<p>身長と体重を入力して計算できるよ。</p>
+<input id="height" type="number" step="0.1" placeholder="身長(cm)" style="padding:12px;width:100%;margin:5px 0">
+<input id="weight" type="number" step="0.1" placeholder="体重(kg)" style="padding:12px;width:100%;margin:5px 0">
+<button class="btn" onclick="bmi()">計算！</button><p id="bmiResult"></p>
+</div></div>
+
+<script>
+function greet(){
+  const n=document.getElementById("greetName").value || "Koki";
+  document.getElementById("greetResult").textContent="こんにちは、"+n+"さん！";
+  addPoints(3);
+}
+function calc(){
+  const a=Number(document.getElementById("numA").value), b=Number(document.getElementById("numB").value);
+  const o=document.getElementById("op").value;
+  let r;
+  if(o==="+")r=a+b; if(o==="-")r=a-b; if(o==="×")r=a*b;
+  if(o==="÷")r=b===0?"0では割れません":a/b;
+  document.getElementById("calcResult").textContent="答え："+r;
+  addPoints(3);
+}
+function eto(){
+  const y=Number(document.getElementById("yearInput").value);
+  const e=["子（ネズミ）","丑（ウシ）","寅（トラ）","卯（ウサギ）","辰（タツ）","巳（ヘビ）","午（ウマ）","未（ヒツジ）","申（サル）","酉（ニワトリ）","戌（イヌ）","亥（イノシシ）"];
+  document.getElementById("etoResult").textContent=y+"年は、"+e[(y-4)%12]+"年です。";
+  addPoints(3);
+}
+function updateBigClock(){
+  const d=new Date();
+  document.getElementById("bigClock").textContent=d.toLocaleTimeString("ja-JP");
+  document.getElementById("bigDate").textContent=d.toLocaleDateString("ja-JP",{year:"numeric",month:"2-digit",day:"2-digit",weekday:"short"});
+}
+setInterval(updateBigClock,1000); updateBigClock();
+
+let swRunning=false, swStartTime=0, swElapsed=0, swTimer;
+function swRender(){
+  const ms=swElapsed+(swRunning?Date.now()-swStartTime:0);
+  const m=String(Math.floor(ms/60000)).padStart(2,"0");
+  const s=String(Math.floor(ms/1000)%60).padStart(2,"0");
+  const cs=String(Math.floor(ms/10)%100).padStart(2,"0");
+  document.getElementById("sw").textContent=m+":"+s+"."+cs;
+}
+function swStart(){if(swRunning)return; swStartTime=Date.now(); swRunning=true; swTimer=setInterval(swRender,30)}
+function swStop(){if(!swRunning)return; swElapsed+=Date.now()-swStartTime; swRunning=false; clearInterval(swTimer); swRender()}
+function swReset(){swRunning=false;clearInterval(swTimer);swElapsed=0;swRender()}
+
+function saveText(){localStorage.setItem("kokiEditor",document.getElementById("editor").value);document.getElementById("editorMsg").textContent="💾 保存したよ！"}
+function loadText(){document.getElementById("editor").value=localStorage.getItem("kokiEditor")||"";document.getElementById("editorMsg").textContent="📂 読み込んだよ！"}
+
+function bmi(){
+  const h=Number(document.getElementById("height").value)/100,w=Number(document.getElementById("weight").value);
+  if(h<=0||w<=0){document.getElementById("bmiResult").textContent="身長と体重を正しく入力してね。";return}
+  document.getElementById("bmiResult").textContent="BMI値は "+(w/(h*h)).toFixed(2)+" です。";
+  addPoints(3);
+}
+</script>
+<script>const pythonWorks={"2月19日　おみくじ　1年　P.42(2).pyw": "import random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\"]\nprint(random.choice(kuji))\n", "2月19日　会話　1年　P.32~35(2).pyw": "print(\"こんにちは、煌己さん！！\")\nprint(\"今日はいい天気ですね！\")\n", "2月19日　計算　1年　P.28~30(2).pyw": "Python 3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)] on win32\nEnter \"help\" below or click \"Help\" above for more information.\n>>> print(7+25)\n32\n>>> print(25-7)\n18\n>>> print(25*4)\n100\n>>> print(25/5)\n5.0\n>>> print(999999999999999999999999999999999999999999999999999999999999999999999999999999999999*999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)\n999999999999999999999999999999999999999999999999999999999999999999999999999999999998999999000000000000000000000000000000000000000000000000000000000000000000000000000000000001\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5*4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"5+4\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"6*3\"です\")\nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\"\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> (\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n>>> print(\"答えは\"4*2\"です\")\n...       \nSyntaxError: invalid syntax. Is this intended to be part of the string?\n", "2月20日　BMI測定装置(身長はｍで！！）　1年　P.44~45(2).pyw": "身長 = 1.435\n体重 = 43.2\nbmi =体重/(身長*身長)\nprint(\"あなたのBMI値は、\",bmi,\"です\")\n", "2月20日　True or False　1年　P.76~77(1).pyw": "b= \"こんにちは\"\nif b.isdigit():\n    print(int(b)+23)\nelse:\n    print(\"数値じゃないよ\")\n", "2月20日　おみくじ（発展）　1年　P.80～81　(1).pyw": "print(\"大吉（だいきち） - 最も良い結果\" \"\\n\"\"中吉（ちゅうきち） - とても良い結果\"\"\\n\" \"小吉（しょうきち） - 良い運勢\"\"\\n\" \"吉（きち） - 順調な運勢\"\"\\n\" \"半吉（はんきち） - まずまず良い運勢\"\"\\n\" \"末吉（すえきち） - 最後に良くなる\"\"\\n\" \"末小吉（すえしょうきち） - 最後に少し良くなる\"\"\\n\"\"凶（きょう） - 悪い結果\"\"\\n\" \"小凶（しょうきょう） - 小さな悪い結果\"\"\\n\"\"半凶（はんきょう） - 半分悪い結果\"\"\\n\" \"末凶（すえきょう） - 最後に悪くなる\"\"\\n\" \"大凶（だいきょう） - 最も悪い結果\")\nimport random\nkuji=[\"大吉\",\"中吉\",\"小吉\",\"吉\",\"半吉\",\"末吉\",\"末小吉\",\"半凶\",\"末凶\",\"末小吉\",\"大凶\"]\nprint(\"\\n\",random.choice(kuji))\n", "2月20日　カメさん円形！　1年　P.53(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    circle(100)\n    left(72)\ndone()\n", "2月20日　カメさん星形！　1年　P.52(1).pyw": "from turtle import *\nshape(\"turtle\")\ncol = [\"orange\",\"limegreen\",\"gold\",\"plum\",\"tomato\"]\nfor i in range(5):\n    color(col[i])\n    forward(200)\n    left(144)\ndone()\n", "2月20日　カメさん正方形 ！　1年　P.50(1).pyw": "from turtle import *\nshape(\"turtle\")\nfor i in range(4):\n    forward(100)\n    left(90)\ndone()\n", "2月20日　カメさん直進！　1年　P.49(1).pyw": "from turtle import *\nshape(\"turtle\")\nforward(100)\ndone()\n", "2月20日　リスト　昼ごはん　1年　P.78～79(1).pyw": "lunch = [\"おにぎり\",\"パスタ\",\"ハンバーガー\",\"カレー\",\"定食\",\"サンドウィッチ\"]\nprint(lunch[2])\n", "2月20日　リストの中身を表示させ、足し算をする　1年　P.97(1).pyw": "scorelist = [64,100,78,80,72]\ntotal = 0\nfor i in scorelist:\n    total = total +i\nprint(total)\n", "2月20日　リストの中身を表示させる　1年　P.95(1).pyw": "scorelist = [64,100,78,80,72]\nfor i in scorelist:\n    print(i)\n"}; function showCode(n){document.getElementById('codeView').textContent=pythonWorks[n]||'内容なし'; addPoints(1);}</script></body>
 </html>
