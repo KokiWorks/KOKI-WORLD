@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKI WORLD 🚀</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  background:
+    radial-gradient(circle at top, #243b80, #090d1f 55%, #03040a);
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  padding: 70px 20px 40px;
+}
+
+h1 {
+  font-size: clamp(42px, 9vw, 90px);
+  margin: 0;
+  letter-spacing: 4px;
+  text-shadow: 0 0 30px #5d8cff;
+}
+
+.subtitle {
+  color: #b8c5ff;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.container {
+  width: min(1000px, 92%);
+  margin: auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  padding: 25px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.13);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #6c8cff;
+  color: white;
+}
+
+button:hover {
+  background: #87a1ff;
+}
+
+.info {
+  margin-top: 25px;
+  text-align: center;
+  color: #b8c5ff;
+}
+
+footer {
+  text-align: center;
+  padding: 50px 20px 30px;
+  color: #7781a8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>KOKI WORLD 🚀</h1>
+  <div class="subtitle">
+    ようこそ！ここはKokiのホームページ！
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="cards">
+
+    <div class="card">
+      <h2>🎮 GAME</h2>
+      <p>作ったゲームをここに追加していくよ！</p>
+      <button onclick="game()">ゲームを起動</button>
+    </div>
+
+    <div class="card">
+      <h2>🐍 PYTHON</h2>
+      <p>Pythonで作った作品を展示するコーナー。</p>
+      <button onclick="python()">作品を見る</button>
+    </div>
+
+    <div class="card">
+      <h2>🔥 TREND</h2>
+      <p>最新のトレンド情報を表示する予定！</p>
+      <button onclick="trend()">チェック</button>
+    </div>
+
+    <div class="card">
+      <h2>✨ SECRET</h2>
+      <p>何かが隠されている……？</p>
+      <button onclick="secret()">？？？</button>
+    </div>
+
+  </div>
+
+  <div class="info">
+    🕒 現在時刻：<span id="clock"></span>
+  </div>
+
+</main>
+
+<footer>
+  © 2026 KOKI WORLD
+</footer>
+
+<script>
+function updateClock() {
+  const now = new Date();
+
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString("ja-JP");
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+function game() {
+  alert("🎮 ゲームコーナーは準備中！");
+}
+
+function python() {
+  alert("🐍 Python作品を追加していこう！");
+}
+
+function trend() {
+  alert("🔥 トレンド情報はこれから自動更新対応予定！");
+}
+
+function secret() {
+  alert("😎 シークレットを発見！");
+}
+</script>
+
+</body>
+</html>
