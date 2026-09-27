@@ -3,839 +3,338 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>KOKI WORLD 🚀</title>
-
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-
-  font-family:
-    Arial,
-    "Hiragino Kaku Gothic ProN",
-    "Yu Gothic",
-    sans-serif;
-
-  color: white;
-
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#fff;
   background:
-    radial-gradient(circle at 50% 0%, #304da0 0%, #111936 35%, #050713 80%);
+    radial-gradient(circle at 20% 20%,#22265f 0,transparent 30%),
+    radial-gradient(circle at 80% 30%,#321d61 0,transparent 30%),
+    linear-gradient(135deg,#050713,#090b19 55%,#11142a);
+  min-height:100vh;
+  overflow-x:hidden;
 }
-
-/* =========================
-   背景アニメーション
-========================= */
-
-.stars,
-.stars::before,
-.stars::after {
-  position: fixed;
-  inset: 0;
-  content: "";
-  pointer-events: none;
+body:before,body:after{
+  content:"✦  ·  ✧    ·   ✦      ·  ✧   ·     ✦";
+  position:fixed;
+  inset:0;
+  color:#fff;
+  opacity:.18;
+  font-size:28px;
+  letter-spacing:35px;
+  line-height:90px;
+  pointer-events:none;
+  animation:stars 12s linear infinite;
+  z-index:-1;
 }
+body:after{animation-duration:20s;opacity:.1;transform:translateY(-40px)}
+@keyframes stars{to{transform:translateY(90px)}}
 
-.stars {
-  background-image:
-    radial-gradient(circle, white 1px, transparent 1px),
-    radial-gradient(circle, #7aa2ff 1px, transparent 1px);
+header{text-align:center;padding:55px 18px 25px}
+h1{font-size:clamp(44px,9vw,88px);margin:0;font-weight:900;letter-spacing:3px;text-shadow:0 0 25px #6871ff}
+.subtitle{font-size:18px;opacity:.8;margin:12px 0 0}
 
-  background-size: 90px 90px, 140px 140px;
-  opacity: 0.35;
-
-  animation: moveStars 25s linear infinite;
-  z-index: -2;
+.container{width:min(1150px,92%);margin:auto}
+.nav{
+  display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px 0 30px
 }
-
-.stars::before {
-  background:
-    radial-gradient(circle at 20% 20%, #4d7cff55, transparent 25%),
-    radial-gradient(circle at 80% 30%, #8d4dff44, transparent 25%),
-    radial-gradient(circle at 50% 90%, #00d9ff33, transparent 25%);
-
-  filter: blur(30px);
-  animation: glow 8s ease-in-out infinite alternate;
+.nav button,.btn{
+  border:0;border-radius:14px;padding:12px 18px;color:#fff;
+  background:linear-gradient(135deg,#4b55d9,#713ee8);
+  font-weight:800;cursor:pointer;box-shadow:0 8px 22px #0005;
+  transition:.2s;
 }
+.nav button:hover,.btn:hover{transform:translateY(-3px);filter:brightness(1.12)}
 
-@keyframes moveStars {
-  from {
-    transform: translateY(0);
-  }
-
-  to {
-    transform: translateY(90px);
-  }
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.card{
+  background:#111422cc;border:1px solid #ffffff14;border-radius:24px;
+  padding:28px;box-shadow:0 15px 45px #0005;backdrop-filter:blur(10px);
 }
+.card h2{margin-top:0;font-size:28px}
+.card p{color:#bfc2d8;line-height:1.7}
+.big{grid-column:1/-1}
 
-@keyframes glow {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(1.15);
-  }
+.gamebox{
+  text-align:center;background:#080b18;border-radius:20px;padding:22px;margin-top:15px;
+  border:1px solid #ffffff12
 }
-
-/* =========================
-   ヘッダー
-========================= */
-
-header {
-  width: min(1100px, 92%);
-  margin: auto;
-  text-align: center;
-
-  padding:
-    clamp(50px, 9vw, 100px)
-    0
-    40px;
+.score{font-size:25px;font-weight:900;margin:12px}
+.game-button{
+  width:min(420px,100%);height:130px;border:0;border-radius:24px;
+  background:linear-gradient(135deg,#ff5d9e,#7447ef);
+  color:#fff;font-size:30px;font-weight:900;cursor:pointer;
+  box-shadow:0 12px 35px #0007;
 }
+.game-button:active{transform:scale(.97)}
+.timer{font-size:18px;color:#c9cbdf}
+.result{min-height:30px;font-weight:800}
 
-.logo {
-  font-size: clamp(43px, 10vw, 95px);
-  font-weight: 900;
-  letter-spacing: clamp(1px, 0.7vw, 6px);
-
-  margin: 0;
-
-  animation: floating 3s ease-in-out infinite;
-
-  text-shadow:
-    0 0 10px #6d8cff,
-    0 0 30px #405cff,
-    0 0 70px #263cff;
+.python-code{
+  background:#070912;border-radius:16px;padding:16px;overflow:auto;
+  color:#d9dcff;font-family:Consolas,monospace
 }
+.point{font-size:38px;font-weight:900;text-align:center}
+.coin{font-size:90px;cursor:pointer;display:block;margin:auto;transition:.1s;user-select:none}
+.coin:active{transform:scale(.8) rotate(10deg)}
 
-@keyframes floating {
-  0%,100% {
-    transform: translateY(0);
-  }
+.footer{text-align:center;padding:35px 15px;color:#777b95}
+.clock{text-align:center;font-size:20px;margin:25px 0;padding:20px;background:#101321cc;border-radius:18px}
 
-  50% {
-    transform: translateY(-8px);
-  }
+.modal{
+  display:none;position:fixed;inset:0;background:#000b;z-index:10;
+  align-items:center;justify-content:center;padding:20px
 }
-
-.subtitle {
-  margin-top: 20px;
-  color: #c8d2ff;
-
-  font-size: clamp(14px, 2vw, 20px);
+.modal.show{display:flex}
+.modalbox{
+  width:min(650px,100%);max-height:90vh;overflow:auto;
+  background:#121528;border:1px solid #ffffff20;border-radius:25px;padding:28px;
+  box-shadow:0 25px 80px #000
 }
+.close{float:right;background:#252a45;color:#fff;border:0;border-radius:10px;padding:8px 12px;cursor:pointer}
 
-/* =========================
-   ナビ
-========================= */
-
-nav {
-  width: min(900px, 92%);
-  margin: auto;
-
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  margin-bottom: 35px;
+@media(max-width:700px){
+  header{padding-top:35px}
+  .grid{grid-template-columns:1fr}
+  .big{grid-column:auto}
+  .card{padding:22px}
+  .game-button{height:110px;font-size:25px}
 }
-
-nav a {
-  text-decoration: none;
-  color: white;
-
-  padding: 10px 15px;
-
-  border-radius: 999px;
-
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-
-  transition: 0.2s;
-}
-
-nav a:hover {
-  background: rgba(255,255,255,0.18);
-  transform: translateY(-2px);
-}
-
-/* =========================
-   メイン
-========================= */
-
-.container {
-  width: min(1100px, 92%);
-  margin: auto;
-}
-
-.cards {
-  display: grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fit,
-      minmax(
-        min(100%, 280px),
-        1fr
-      )
-    );
-
-  gap: clamp(15px, 2vw, 24px);
-}
-
-/* =========================
-   カード
-========================= */
-
-.card {
-  padding: clamp(20px, 3vw, 30px);
-
-  border-radius: 25px;
-
-  background: rgba(255,255,255,0.08);
-
-  border: 1px solid rgba(255,255,255,0.15);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  box-shadow:
-    0 15px 50px rgba(0,0,0,0.3);
-
-  transition:
-    transform 0.25s,
-    background 0.25s;
-}
-
-.card:hover {
-  transform: translateY(-7px);
-
-  background:
-    rgba(255,255,255,0.13);
-}
-
-.card h2 {
-  margin-top: 0;
-
-  font-size:
-    clamp(21px, 3vw, 28px);
-}
-
-.card p {
-  color: #c7d0ef;
-
-  line-height: 1.7;
-
-  font-size:
-    clamp(14px, 2vw, 17px);
-}
-
-/* =========================
-   ボタン
-========================= */
-
-button {
-  width: 100%;
-
-  border: none;
-  border-radius: 15px;
-
-  padding: 15px;
-
-  margin-top: 12px;
-
-  color: white;
-
-  font-size: 16px;
-  font-weight: bold;
-
-  cursor: pointer;
-
-  background:
-    linear-gradient(
-      135deg,
-      #6687ff,
-      #805cff
-    );
-
-  box-shadow:
-    0 5px 20px rgba(80,100,255,0.3);
-
-  transition: 0.2s;
-}
-
-button:hover {
-  filter: brightness(1.15);
-  transform: scale(1.02);
-}
-
-button:active {
-  transform: scale(0.97);
-}
-
-/* =========================
-   時計
-========================= */
-
-.clock {
-  margin-top: 30px;
-
-  text-align: center;
-
-  padding: 25px;
-
-  border-radius: 22px;
-
-  background:
-    rgba(0,0,0,0.25);
-
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.clock-title {
-  color: #9eafff;
-  font-size: 14px;
-}
-
-#clock {
-  margin-top: 7px;
-
-  font-size:
-    clamp(28px, 7vw, 58px);
-
-  font-weight: bold;
-
-  letter-spacing: 3px;
-
-  text-shadow:
-    0 0 20px #5f7cff;
-}
-
-#date {
-  margin-top: 8px;
-  color: #aeb9df;
-}
-
-/* =========================
-   ゲーム
-========================= */
-
-.game-box {
-  margin-top: 25px;
-
-  text-align: center;
-
-  padding: 25px;
-
-  border-radius: 22px;
-
-  background: rgba(255,255,255,0.06);
-
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.score {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.game-button {
-  max-width: 400px;
-  margin: 15px auto 0;
-}
-
-/* =========================
-   Python
-========================= */
-
-.project {
-  padding: 14px;
-
-  margin-top: 12px;
-
-  border-radius: 14px;
-
-  background: rgba(255,255,255,0.05);
-
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-/* =========================
-   Secret
-========================= */
-
-.secret-area {
-  margin-top: 25px;
-
-  text-align: center;
-
-  padding: 25px;
-
-  border-radius: 22px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(130,80,255,0.15),
-      rgba(30,100,255,0.12)
-    );
-
-  border: 1px solid rgba(150,130,255,0.25);
-}
-
-#secretMessage {
-  display: none;
-
-  margin-top: 15px;
-
-  color: #bfcaff;
-
-  font-weight: bold;
-}
-
-/* =========================
-   フッター
-========================= */
-
-footer {
-  text-align: center;
-
-  padding:
-    60px 20px 30px;
-
-  color: #7781a8;
-
-  font-size: 13px;
-}
-
-/* =========================
-   スマホ
-========================= */
-
-@media (max-width: 600px) {
-
-  header {
-    padding-top: 55px;
-  }
-
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
-  nav {
-    gap: 7px;
-  }
-
-  nav a {
-    font-size: 13px;
-    padding: 8px 12px;
-  }
-
-  .card {
-    border-radius: 20px;
-  }
-
-  button {
-    min-height: 48px;
-  }
-}
-
-/* =========================
-   タッチ端末
-========================= */
-
-@media (hover: none) {
-
-  .card:hover {
-    transform: none;
-  }
-
-  button:hover {
-    transform: none;
-  }
-}
-
 </style>
 </head>
-
-
 <body>
 
-<div class="stars"></div>
-
-
-<!-- =========================
-     ヘッダー
-========================= -->
-
 <header>
-
-  <h1 class="logo">
-    KOKI WORLD 🚀
-  </h1>
-
-  <div class="subtitle">
-    Welcome to Koki's World!
-  </div>
-
+  <h1>KOKI WORLD 🚀</h1>
+  <div class="subtitle">ようこそ！ここはKokiの遊べるホームページ！</div>
 </header>
 
+<div class="container">
 
-<!-- =========================
-     ナビ
-========================= -->
+  <div class="nav">
+    <button onclick="openModal('gameModal')">🎮 ゲーム</button>
+    <button onclick="openModal('omikujiModal')">🎲 おみくじ</button>
+    <button onclick="openModal('coinModal')">🪙 コイン</button>
+    <button onclick="openModal('pythonModal')">🐍 Python</button>
+    <button onclick="secret()">🤫 シークレット</button>
+  </div>
 
-<nav>
+  <div class="grid">
 
-  <a href="#game">
-    🎮 GAME
-  </a>
+    <section class="card">
+      <h2>🎮 GAME</h2>
+      <p>10秒間で何回クリックできる？ハイスコアにも挑戦！</p>
+      <button class="btn" onclick="openModal('gameModal')">ゲームを起動</button>
+    </section>
 
-  <a href="#python">
-    🐍 PYTHON
-  </a>
+    <section class="card">
+      <h2>🐍 PYTHON</h2>
+      <p>Pythonで作った作品を展示するコーナー。</p>
+      <button class="btn" onclick="openModal('pythonModal')">作品を見る</button>
+    </section>
 
-  <a href="#trend">
-    🔥 TREND
-  </a>
+    <section class="card">
+      <h2>🔥 TREND</h2>
+      <p>気になるものをチェック！</p>
+      <button class="btn" onclick="trend()">チェック</button>
+      <p id="trendResult"></p>
+    </section>
 
-  <a href="#secret">
-    🤫 SECRET
-  </a>
+    <section class="card">
+      <h2>✨ SECRET</h2>
+      <p>何かが隠れている……？</p>
+      <button class="btn" onclick="secret()">？？？</button>
+    </section>
 
-</nav>
+    <section class="card big">
+      <h2>🪙 KOKI POINT</h2>
+      <p>サイトで遊んでポイントを集めよう！ポイントはこのブラウザに保存されるよ。</p>
+      <div class="point"><span id="points">0</span> P</div>
+      <span class="coin" onclick="getCoin()">🪙</span>
+      <p style="text-align:center">コインをクリック！</p>
+    </section>
 
-
-<main class="container">
-
-
-<!-- =========================
-     カード
-========================= -->
-
-<div class="cards">
-
-
-<!-- GAME -->
-
-<section class="card" id="game">
-
-  <h2>
-    🎮 GAME
-  </h2>
-
-  <p>
-    KOKI WORLDオリジナルミニゲーム！
-  </p>
-
-  <div class="game-box">
-
-    <div>
-      クリックするとスコアが増える！
-    </div>
-
-    <div class="score">
-      SCORE:
-      <span id="score">
-        0
-      </span>
-    </div>
-
-    <button
-      class="game-button"
-      onclick="addScore()"
-    >
-      🚀 CLICK!!
-    </button>
-
-    <button
-      class="game-button"
-      onclick="resetScore()"
-    >
-      リセット
-    </button>
+    <section class="card big">
+      <h2>🏆 マイ記録</h2>
+      <p>クリックゲーム最高記録：<b id="best">0</b> 回</p>
+      <p>集めたポイント：<b id="bestPoints">0</b> P</p>
+    </section>
 
   </div>
 
-</section>
-
-
-<!-- PYTHON -->
-
-<section class="card" id="python">
-
-  <h2>
-    🐍 PYTHON
-  </h2>
-
-  <p>
-    Pythonで作った作品コーナー！
-  </p>
-
-  <div class="project">
-    🐍 Pythonゲーム
-    <br>
-    <small>
-      作品を追加予定！
-    </small>
-  </div>
-
-  <div class="project">
-    🤖 Pythonプログラム
-    <br>
-    <small>
-      作品を追加予定！
-    </small>
-  </div>
-
-  <button onclick="pythonMessage()">
-    Python作品を見る
-  </button>
-
-</section>
-
-
-<!-- TREND -->
-
-<section class="card" id="trend">
-
-  <h2>
-    🔥 TREND
-  </h2>
-
-  <p>
-    今後、最新トレンドを表示するコーナー！
-  </p>
-
-  <div class="project">
-    🔥 トレンド情報
-    <br>
-    <small id="trendText">
-      現在準備中！
-    </small>
-  </div>
-
-  <button onclick="showTrend()">
-    トレンドを見る
-  </button>
-
-</section>
-
-
-<!-- SECRET -->
-
-<section class="card" id="secret">
-
-  <h2>
-    🤫 SECRET
-  </h2>
-
-  <p>
-    KOKI WORLDの秘密を探せ……。
-  </p>
-
-  <div class="secret-area">
-
-    🔒 SECRET AREA
-
-    <button onclick="secret()">
-      秘密を開く
-    </button>
-
-    <div id="secretMessage">
-      🎉 SECRETを発見した！！<br>
-      KOKI WORLDへようこそ！！🚀
-    </div>
-
-  </div>
-
-</section>
-
+  <div class="clock">🕒 現在時刻：<span id="clock">--:--:--</span></div>
 
 </div>
 
+<div class="footer">© 2026 KOKI WORLD 🚀</div>
 
-<!-- =========================
-     時計
-========================= -->
-
-<section class="clock">
-
-  <div class="clock-title">
-    🕒 KOKI WORLD CLOCK
+<!-- GAME -->
+<div class="modal" id="gameModal">
+  <div class="modalbox">
+    <button class="close" onclick="closeModal('gameModal')">✕</button>
+    <h2>🎮 10秒クリックゲーム</h2>
+    <p>スタートしたら、10秒間ボタンを連打！</p>
+    <div class="gamebox">
+      <div class="timer">残り：<span id="time">10</span> 秒</div>
+      <div class="score">スコア：<span id="score">0</span></div>
+      <button class="game-button" id="clickBtn" onclick="clickGame()">CLICK!</button>
+      <div class="result" id="gameResult">スタートを押してね！</div>
+      <br>
+      <button class="btn" onclick="startGame()">▶ スタート</button>
+    </div>
   </div>
+</div>
 
-  <div id="clock">
-    00:00:00
+<!-- OMIKUJI -->
+<div class="modal" id="omikujiModal">
+  <div class="modalbox" style="text-align:center">
+    <button class="close" onclick="closeModal('omikujiModal')">✕</button>
+    <h2>🎲 KOKIおみくじ</h2>
+    <div id="fortune" style="font-size:45px;margin:30px 0">？？？</div>
+    <button class="btn" onclick="omikuji()">おみくじを引く！</button>
   </div>
+</div>
 
-  <div id="date">
-    ----/--/-- ---
+<!-- COIN -->
+<div class="modal" id="coinModal">
+  <div class="modalbox" style="text-align:center">
+    <button class="close" onclick="closeModal('coinModal')">✕</button>
+    <h2>🪙 コイン集め</h2>
+    <p>コインをクリックするとKOKI POINTが増える！</p>
+    <div class="point"><span id="modalPoints">0</span> P</div>
+    <span class="coin" onclick="getCoin()">🪙</span>
   </div>
+</div>
 
-</section>
-
-
-</main>
-
-
-<footer>
-
-  © 2026 KOKI WORLD 🚀
-
-  <br><br>
-
-  Made by Koki
-
-</footer>
-
+<!-- PYTHON -->
+<div class="modal" id="pythonModal">
+  <div class="modalbox">
+    <button class="close" onclick="closeModal('pythonModal')">✕</button>
+    <h2>🐍 Python作品</h2>
+    <p>ここにKokiが作ったPython作品をどんどん追加できる！</p>
+    <div class="python-code">
+print("Hello KOKI WORLD!")<br><br>
+# これからゲームを追加予定！<br>
+# Pythonで作った作品をここに展示しよう。
+    </div>
+    <br>
+    <button class="btn" onclick="addPoints(20);alert('🐍 Pythonボーナス！ +20P')">Pythonボーナス</button>
+  </div>
+</div>
 
 <script>
-
-/* =========================
-   時計
-========================= */
-
-function updateClock() {
-
-  const now = new Date();
-
-  const time =
-    now.toLocaleTimeString(
-      "ja-JP",
-      {
-        hour12: false
-      }
-    );
-
-  const date =
-    now.toLocaleDateString(
-      "ja-JP",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-        weekday: "long"
-      }
-    );
-
-  document.getElementById("clock").textContent =
-    time;
-
-  document.getElementById("date").textContent =
-    date;
-
-}
-
-setInterval(updateClock, 1000);
-
-updateClock();
-
-
-/* =========================
-   ゲーム
-========================= */
-
+let points = Number(localStorage.getItem("kokiPoints") || 0);
+let best = Number(localStorage.getItem("kokiBest") || 0);
 let score = 0;
+let playing = false;
+let timeLeft = 10;
+let timerId = null;
 
-function addScore() {
+function updateStats(){
+  document.getElementById("points").textContent = points;
+  document.getElementById("modalPoints").textContent = points;
+  document.getElementById("bestPoints").textContent = points;
+  document.getElementById("best").textContent = best;
+  localStorage.setItem("kokiPoints", points);
+  localStorage.setItem("kokiBest", best);
+}
+updateStats();
 
+function addPoints(n){
+  points += n;
+  updateStats();
+}
+
+function getCoin(){
+  addPoints(1);
+}
+
+function openModal(id){
+  document.getElementById(id).classList.add("show");
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove("show");
+}
+
+window.addEventListener("click",e=>{
+  if(e.target.classList.contains("modal")) e.target.classList.remove("show");
+});
+
+function startGame(){
+  clearInterval(timerId);
+  score=0;
+  timeLeft=10;
+  playing=true;
+  document.getElementById("score").textContent=score;
+  document.getElementById("time").textContent=timeLeft;
+  document.getElementById("gameResult").textContent="連打スタート！！！🔥";
+  timerId=setInterval(()=>{
+    timeLeft--;
+    document.getElementById("time").textContent=timeLeft;
+    if(timeLeft<=0) endGame();
+  },1000);
+}
+function clickGame(){
+  if(!playing) return;
   score++;
-
-  document.getElementById("score").textContent =
-    score;
-
+  document.getElementById("score").textContent=score;
 }
-
-function resetScore() {
-
-  score = 0;
-
-  document.getElementById("score").textContent =
-    score;
-
-}
-
-
-/* =========================
-   Python
-========================= */
-
-function pythonMessage() {
-
-  alert(
-    "🐍 Python作品をどんどん追加していこう！"
-  );
-
-}
-
-
-/* =========================
-   トレンド
-========================= */
-
-function showTrend() {
-
-  document.getElementById("trendText").textContent =
-    "🔥 トレンド機能はアップデート予定！";
-
-}
-
-
-/* =========================
-   SECRET
-========================= */
-
-function secret() {
-
-  const message =
-    document.getElementById("secretMessage");
-
-  message.style.display = "block";
-
-}
-
-
-/* =========================
-   キーボード隠し機能
-========================= */
-
-let keys = "";
-
-document.addEventListener(
-  "keydown",
-  function(event) {
-
-    keys += event.key.toLowerCase();
-
-    if (keys.length > 20) {
-      keys = keys.slice(-20);
-    }
-
-    if (keys.includes("koki")) {
-
-      alert(
-        "🚀 KOKI CODE ACTIVATED!!"
-      );
-
-      keys = "";
-    }
-
+function endGame(){
+  clearInterval(timerId);
+  playing=false;
+  if(score>best){
+    best=score;
+    document.getElementById("gameResult").textContent="🎉 NEW RECORD！ "+score+" 回！";
+  }else{
+    document.getElementById("gameResult").textContent="結果："+score+" 回！";
   }
-);
+  addPoints(Math.max(1,score));
+  updateStats();
+}
 
+function omikuji(){
+  const list=[
+    ["🌟 大吉","今日は最高の一日！"],
+    ["😎 中吉","いいことが起こるかも！"],
+    ["🍀 小吉","小さなラッキー発見！"],
+    ["🙂 吉","コツコツいこう！"],
+    ["🎈 末吉","焦らずマイペース！"]
+  ];
+  const x=list[Math.floor(Math.random()*list.length)];
+  document.getElementById("fortune").innerHTML=x[0]+"<div style='font-size:20px;margin-top:15px'>"+x[1]+"</div>";
+  addPoints(5);
+}
+
+function trend(){
+  const messages=[
+    "🔥 KOKI WORLDを遊ぶのが今のおすすめ！",
+    "🚀 新しいゲームを作ってみよう！",
+    "🐍 Pythonで作品を増やそう！",
+    "🪙 コインを集めてポイントを増やそう！"
+  ];
+  document.getElementById("trendResult").textContent=
+    messages[Math.floor(Math.random()*messages.length)];
+  addPoints(2);
+}
+
+function secret(){
+  addPoints(10);
+  alert("😎 シークレットを発見！\\n\\n+10 KOKI POINT！");
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key.toLowerCase()==="k") secret();
+});
+
+setInterval(()=>{
+  const d=new Date();
+  document.getElementById("clock").textContent=
+    d.toLocaleTimeString("ja-JP");
+},1000);
 </script>
-
 
 </body>
 </html>
