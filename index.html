@@ -2,176 +2,516 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+
+<!-- スマホ・タブレット対応 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KOKI WORLD 🚀🔥</title>
+
+<title>KOKI WORLD 🚀</title>
 
 <style>
+/* =========================
+   基本設定
+========================= */
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: white;
-  background:
-    radial-gradient(circle at top, #243b80, #090d1f 55%, #03040a);
-  min-height: 100vh;
+html {
+  scroll-behavior: smooth;
 }
 
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  font-family:
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    sans-serif;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #304da0 0%,
+      #111936 35%,
+      #050713 80%
+    );
+
+  overflow-x: hidden;
+}
+
+
+/* =========================
+   ヘッダー
+========================= */
+
 header {
+  width: min(1100px, 92%);
+  margin: auto;
+
   text-align: center;
-  padding: 70px 20px 40px;
+
+  padding:
+    clamp(45px, 8vw, 80px)
+    0
+    clamp(30px, 6vw, 55px);
 }
 
 h1 {
-  font-size: clamp(42px, 9vw, 90px);
   margin: 0;
-  letter-spacing: 4px;
-  text-shadow: 0 0 30px #5d8cff;
+
+  /* 画面サイズに合わせて自動調整 */
+  font-size: clamp(42px, 9vw, 90px);
+
+  letter-spacing: clamp(1px, 0.6vw, 5px);
+
+  line-height: 1.1;
+
+  text-shadow:
+    0 0 10px #6d8cff,
+    0 0 30px #405cff,
+    0 0 60px #263cff;
 }
 
 .subtitle {
-  color: #b8c5ff;
-  font-size: 18px;
-  margin-top: 15px;
+  margin-top: 20px;
+
+  font-size: clamp(14px, 2vw, 20px);
+
+  color: #c8d2ff;
+
+  line-height: 1.6;
 }
 
+
+/* =========================
+   メイン
+========================= */
+
 .container {
-  width: min(1000px, 92%);
+  width: min(1100px, 92%);
+
   margin: auto;
 }
 
+
+/* =========================
+   カード
+========================= */
+
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+
+  /*
+    画面幅に合わせて自動的に
+    1列・2列・3列へ変化！
+  */
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(
+        min(100%, 280px),
+        1fr
+      )
+    );
+
+  gap: clamp(14px, 2vw, 24px);
 }
 
 .card {
-  padding: 25px;
-  border-radius: 22px;
+  padding: clamp(20px, 3vw, 30px);
+
+  border-radius: clamp(18px, 3vw, 26px);
+
   background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(10px);
-  transition: 0.25s;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.16);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.25);
+
+  transition:
+    transform 0.25s,
+    background 0.25s;
 }
 
 .card:hover {
   transform: translateY(-6px);
-  background: rgba(255,255,255,0.13);
+
+  background:
+    rgba(255,255,255,0.13);
 }
 
 .card h2 {
   margin-top: 0;
+
+  font-size:
+    clamp(20px, 3vw, 27px);
 }
 
+.card p {
+  color: #c7d0ef;
+
+  font-size:
+    clamp(14px, 2vw, 17px);
+
+  line-height: 1.7;
+}
+
+
+/* =========================
+   ボタン
+========================= */
+
 button {
-  border: 0;
-  border-radius: 12px;
-  padding: 12px 20px;
-  margin-top: 15px;
-  font-size: 16px;
+  width: 100%;
+
+  border: none;
+
+  border-radius: 14px;
+
+  padding:
+    clamp(13px, 2vw, 17px);
+
+  margin-top: 12px;
+
+  font-size:
+    clamp(15px, 2vw, 17px);
+
   font-weight: bold;
+
   cursor: pointer;
-  background: #6c8cff;
+
   color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #6687ff,
+      #805cff
+    );
+
+  box-shadow:
+    0 5px 20px
+    rgba(80,100,255,0.3);
+
+  transition:
+    transform 0.2s,
+    filter 0.2s;
 }
 
 button:hover {
-  background: #87a1ff;
+  filter: brightness(1.15);
+
+  transform:
+    scale(1.02);
 }
 
-.info {
-  margin-top: 25px;
-  text-align: center;
-  color: #b8c5ff;
+button:active {
+  transform:
+    scale(0.97);
 }
+
+
+/* =========================
+   時計
+========================= */
+
+.info {
+  margin-top:
+    clamp(20px, 4vw, 35px);
+
+  padding:
+    clamp(15px, 3vw, 20px);
+
+  text-align: center;
+
+  color: #c8d2ff;
+
+  background:
+    rgba(255,255,255,0.05);
+
+  border-radius: 18px;
+
+  font-size:
+    clamp(13px, 2vw, 16px);
+}
+
+
+/* =========================
+   フッター
+========================= */
 
 footer {
   text-align: center;
-  padding: 50px 20px 30px;
+
+  padding:
+    clamp(40px, 7vw, 65px)
+    20px
+    30px;
+
   color: #7781a8;
+
+  font-size:
+    clamp(12px, 2vw, 15px);
 }
+
+
+/* =========================
+   タッチ端末
+========================= */
+
+@media (hover: none) {
+
+  .card:hover {
+    transform: none;
+  }
+
+  button:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================
+   横幅がかなり小さいスマホ
+========================= */
+
+@media (max-width: 360px) {
+
+  .container {
+    width: 94%;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  h1 {
+    font-size: 38px;
+  }
+}
+
+
+/* =========================
+   大画面
+========================= */
+
+@media (min-width: 1400px) {
+
+  .container,
+  header {
+    width: min(1200px, 90%);
+  }
+}
+
 </style>
 </head>
 
+
 <body>
 
+
+<!-- =========================
+     ヘッダー
+========================= -->
+
 <header>
-  <h1>KOKI WORLD 🚀</h1>
+
+  <h1>
+    KOKI WORLD 🚀
+  </h1>
+
   <div class="subtitle">
     ようこそ！ここはKokiのホームページ！
   </div>
+
 </header>
+
+
+<!-- =========================
+     メイン
+========================= -->
 
 <main class="container">
 
   <div class="cards">
 
-    <div class="card">
-      <h2>🎮 GAME</h2>
-      <p>作ったゲームをここに追加していくよ！</p>
-      <button onclick="game()">ゲームを起動</button>
-    </div>
+
+    <!-- GAME -->
 
     <div class="card">
-      <h2>🐍 PYTHON</h2>
-      <p>Pythonで作った作品を展示するコーナー。</p>
-      <button onclick="python()">作品を見る</button>
+
+      <h2>
+        🎮 GAME
+      </h2>
+
+      <p>
+        作ったゲームをここに追加していくよ！
+      </p>
+
+      <button onclick="game()">
+        ゲームを起動
+      </button>
+
     </div>
 
-    <div class="card">
-      <h2>🔥 TREND</h2>
-      <p>最新のトレンド情報を表示する予定！</p>
-      <button onclick="trend()">チェック</button>
-    </div>
+
+    <!-- PYTHON -->
 
     <div class="card">
-      <h2>✨ SECRET</h2>
-      <p>何かが隠されている……？</p>
-      <button onclick="secret()">？？？</button>
+
+      <h2>
+        🐍 PYTHON
+      </h2>
+
+      <p>
+        Pythonで作った作品を展示するコーナー。
+      </p>
+
+      <button onclick="python()">
+        作品を見る
+      </button>
+
     </div>
+
+
+    <!-- TREND -->
+
+    <div class="card">
+
+      <h2>
+        🔥 TREND
+      </h2>
+
+      <p>
+        最新のトレンド情報を表示する予定！
+      </p>
+
+      <button onclick="trend()">
+        チェック
+      </button>
+
+    </div>
+
+
+    <!-- SECRET -->
+
+    <div class="card">
+
+      <h2>
+        ✨ SECRET
+      </h2>
+
+      <p>
+        何かが隠されている……？
+      </p>
+
+      <button onclick="secret()">
+        ？？？
+      </button>
+
+    </div>
+
 
   </div>
+
+
+  <!-- 時計 -->
 
   <div class="info">
-    🕒 現在時刻：<span id="clock"></span>
+
+    🕒 現在時刻：
+    <span id="clock">
+    </span>
+
   </div>
+
 
 </main>
 
+
+<!-- =========================
+     フッター
+========================= -->
+
 <footer>
-  © 2026 KOKI WORLD
+
+  © 2026 KOKI WORLD 🚀
+
 </footer>
 
+
 <script>
+
+/* =========================
+   時計
+========================= */
+
 function updateClock() {
+
   const now = new Date();
 
   document.getElementById("clock").textContent =
     now.toLocaleTimeString("ja-JP");
+
 }
 
 setInterval(updateClock, 1000);
+
 updateClock();
 
+
+/* =========================
+   ボタン
+========================= */
+
 function game() {
-  alert("🎮 ゲームコーナーは準備中！");
+
+  alert(
+    "🎮 ゲームコーナーは準備中！"
+  );
+
 }
+
 
 function python() {
-  alert("🐍 Python作品を追加していこう！");
+
+  alert(
+    "🐍 Python作品を追加していこう！"
+  );
+
 }
+
 
 function trend() {
-  alert("🔥 トレンド情報はこれから自動更新対応予定！");
+
+  alert(
+    "🔥 トレンド情報はこれから自動更新対応予定！"
+  );
+
 }
 
+
 function secret() {
-  alert("😎 シークレットを発見！");
+
+  alert(
+    "😎 シークレットを発見！"
+  );
+
 }
+
 </script>
+
 
 </body>
 </html>
